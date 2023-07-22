@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, null=True)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('cooks', models.ManyToManyField(related_name='dish', to=settings.AUTH_USER_MODEL)),
-                ('dish_type', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='dish', to='resturaunt_app.dishtype')),
+                ('dish_type', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='dish', to='restaurant_app.dishtype')),
             ],
         ),
     ]

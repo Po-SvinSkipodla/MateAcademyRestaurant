@@ -8,9 +8,12 @@ class DishType(models.Model):
     class Meta:
         ordering = ["name"]
 
+    def __str__(self):
+        return self.name
+
 
 class Cook(AbstractUser):
-    years_of_experience = models.IntegerField()
+    years_of_experience = models.IntegerField(null=True)
 
     class Meta:
         verbose_name_plural = "cooks"
