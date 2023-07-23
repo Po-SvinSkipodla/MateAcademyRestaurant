@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from restaurant_app.forms import CookCreationForm, CookLicenseUpdateForm, DishForm
+from restaurant_app.forms import CookCreationForm, DishForm, CookUpdateForm, DishTypeForm
 from restaurant_app.models import Cook, Dish, DishType
 
 
@@ -44,7 +44,7 @@ class CookCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
-    form_class = CookLicenseUpdateForm
+    form_class = CookUpdateForm
     success_url = reverse_lazy("cook-list")
 
 
@@ -64,3 +64,30 @@ class CookDetailView(generic.DetailView):
 class DishTypeListView(LoginRequiredMixin, generic.ListView):
     model = DishType
     template_name = "restaurant_app/dish_type_list.html"
+    context_object_name = "dish_types_list"
+
+
+class DishTypeDetailView(LoginRequiredMixin, generic.DetailView):
+    model = DishType
+    template_name = "restaurant_app/dish_type_detail.html"
+
+
+class DishTypeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = DishType
+    form_class = DishTypeForm
+    template_name = 'restaurant_app/dish_type_form.html'
+    success_url = reverse_lazy("dish-type-list")
+
+
+class DishTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = DishType
+    form_class = DishTypeForm
+    template_name = 'restaurant_app/dish_type_form.html'
+    success_url = reverse_lazy("dish-type-list")
+
+
+class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = DishType
+    template_name = 'restaurant_app/dish_type_confirm_delete.html'
+    success_url = reverse_lazy("dish-type-list")
+

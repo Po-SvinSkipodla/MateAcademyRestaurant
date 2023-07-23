@@ -3,7 +3,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.exceptions import ValidationError
 
-from restaurant_app.models import Cook, Dish
+from restaurant_app.models import Cook, Dish, DishType
+
+
+class DishTypeForm(forms.ModelForm):
+
+    class Meta:
+        model = DishType
+        fields = "__all__"
 
 
 class DishForm(forms.ModelForm):
@@ -31,7 +38,7 @@ class CookCreationForm(UserCreationForm):
         return validate_years_of_experience(self.cleaned_data["years_of_experience"])
 
 
-class CookLicenseUpdateForm(forms.ModelForm):
+class CookUpdateForm(forms.ModelForm):
     class Meta:
         model = Cook
         fields = ["years_of_experience"]

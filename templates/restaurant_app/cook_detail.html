@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="cook-detail-container">
+  <div class="detail-container">
     <h1>
       Username: {{ cook.username }}
       <a href="{% url 'cook-delete' pk=cook.id %}" class="btn btn-danger link-to-page">
