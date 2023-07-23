@@ -1,38 +1,54 @@
 {% extends "base.html" %}
 
+{% block styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static "css/page-list.css" %}">
+{% endblock %}
 {% block content %}
-  {% if dish_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Dish type</th>
-        <th>Description</th>
-      </tr>
-
-      {% for dish in dish_list %}
+  <div class="heading">
+    <h1>
+      Dish list
+    </h1>
+    <h1>
+      <a href="{% url 'dish-create' %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
+    </h1>
+  </div>
+  <div class="table-container">
+    {% if dish_list %}
+      <table class="table table-bordered table-condensed">
         <tr>
-          <td>
-              {{ dish.id }}
-          </td>
-          <td>
-              {{ dish.name }}
-          </td>
-          <td>
-              {{ dish.price }}
-          </td>
-          <td>
-              {{ dish.dish_type }}
-          </td>
-          <td>
-              {{ dish.description }}
-          </td>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Dish type</th>
+          <th>Description</th>
         </tr>
-      {% endfor %}
-    </table>
 
-  {% else %}
-      <p>There are no dishes in the service.</p>
-  {% endif %}
+        {% for dish in dish_list %}
+          <tr>
+            <td>
+                {{ dish.id }}
+            </td>
+            <td>
+              <a href="{% url 'dish-detail' pk=dish.id %}">{{ dish.name }}</a>
+            </td>
+            <td>
+                {{ dish.price }}
+            </td>
+            <td>
+                {{ dish.dish_type }}
+            </td>
+            <td>
+                {{ dish.description }}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+
+    {% else %}
+        <p>There are no dishes in the service.</p>
+    {% endif %}
+  </div>
 {% endblock %}
