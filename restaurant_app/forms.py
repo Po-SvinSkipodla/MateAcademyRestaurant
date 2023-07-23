@@ -7,7 +7,6 @@ from restaurant_app.models import Cook, Dish, DishType
 
 
 class DishTypeForm(forms.ModelForm):
-
     class Meta:
         model = DishType
         fields = "__all__"
