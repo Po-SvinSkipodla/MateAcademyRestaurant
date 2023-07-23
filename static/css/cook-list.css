@@ -1,0 +1,9 @@
+.heading {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 30px;
+}
+
+.table-container {
+    margin: 20px 100px;
+}

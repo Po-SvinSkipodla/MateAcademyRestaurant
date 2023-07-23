@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static "css/cook-list.css" %}">
+{% endblock %}
+
+{% block content %}
+  <div class="heading">
+    <h1>
+      Driver List
+    </h1>
+    <h1>
+      <a href="{% url 'cook-create' %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
+    </h1>
+  </div>
+  <div class="table-container">
+    {% if cook_list %}
+      <table class="table table-bordered table-condensed">
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th>Years of experience</th>
+        </tr>
+      {% for cook in cook_list %}
+        <tr>
+          <td>{{ cook.id }}</td>
+          <td><a href="{% url 'cook-detail' pk=cook.id %}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>
+          <td>{{ cook.first_name }}</td>
+          <td>{{ cook.last_name }}</td>
+          <td>{{ cook.email }}</td>
+          <td>{{ cook.years_of_experience }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+      {% else %}
+        <p>There are no cooks in the service.</p>
+    {% endif %}
+  </div>
+
+{% endblock %}

@@ -1,25 +1,37 @@
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.core.exceptions import ValidationError
 
 from restaurant_app.models import Cook
 
 
 class CookCreationForm(UserCreationForm):
-
     class Meta(UserCreationForm.Meta):
         model = Cook
-        fields = UserCreationForm.Meta.fields + ("years_of_experience", )
+        fields = UserCreationForm.Meta.fields + (
+            "years_of_experience",
+            "first_name",
+            "last_name",
+            "email",
+        )
 
-    # def clean_license_number(self):
-    #     license_num = self.cleaned_data.get("license_number")
-    #     if len(license_num) != 8:
-    #         raise forms.ValidationError(
-    #             "Length of license number must be only 8 characters"
-    #         )
-    #     if not license_num[:3].isalpha() and not license_num[:3].isupper():
-    #         raise forms.ValidationError(
-    #             "First 3 characters must be uppercase letters"
-    #         )
-    #     if not license_num[3:].isdigit():
-    #         raise forms.ValidationError("Last 5 characters must be digits")
-    #
-    #     return license_num
+    def clean_years_of_experience(self):
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+
+
+class CookLicenseUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Cook
+        fields = ["years_of_experience"]
+
+    def clean_years_of_experience(self):
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+
+
+def validate_years_of_experience(
+    years_of_experience,
+):
+    if years_of_experience < 0:
+        raise ValidationError("Years of experience must be greater than 0 or equal")
+
+    return years_of_experience
