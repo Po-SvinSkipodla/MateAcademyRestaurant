@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from restaurant_app.views import (
@@ -6,7 +7,6 @@ from restaurant_app.views import (
     CookListView,
     DishTypeListView,
     CookDetailView,
-    CookCreateView,
     CookUpdateView,
     DishCreateView,
     DishDetailView,
@@ -14,9 +14,10 @@ from restaurant_app.views import (
     DishDeleteView,
     CookDeleteView,
     DishTypeCreateView,
-    DishTypeDetailView,
     DishTypeUpdateView,
     DishTypeDeleteView,
+    UserLoginView,
+    RegisterView,
 )
 
 urlpatterns = [
@@ -39,8 +40,10 @@ urlpatterns = [
         name="dish-type-delete",
     ),
     path("cooks/", CookListView.as_view(), name="cook-list"),
-    path("cooks/create", CookCreateView.as_view(), name="cook-create"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cook-detail"),
     path("cooks/<int:pk>/update", CookUpdateView.as_view(), name="cook-update"),
     path("cooks/<int:pk>/delete", CookDeleteView.as_view(), name="cook-delete"),
+    path("accounts/login/", UserLoginView.as_view(), name="login"),
+    path("accounts/register/", RegisterView.as_view(), name="register"),
+    path("accounts/logout/", LogoutView.as_view(), name="logout"),
 ]
