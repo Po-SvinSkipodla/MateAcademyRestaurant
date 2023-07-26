@@ -1,21 +1,60 @@
-{% extends "base.html" %}
-
-{% block styles %}
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <div class="bg-image" style="width: 100%;">
-    <img style="width: 100%" src="../../static/chef-main_image.jpg" alt="">
-    <div class="mask text-light d-flex justify-content-center flex-column text-center" style="background-color: rgba(0, 0, 0, 0.5)">
-      <h1>Welcome to Mate Restaurant!</h1>
-      {% if user.is_authenticated %}
-        <h4>Use navbar to get more info!</h4>
-      {% else %}
-        <h4>Perfect place for cooks.</h4>
-        <h4><a href="{% url 'login'%}?next={{request.path}}">Log in</a> to continue</h4>
-      {% endif %}
+
+<main>
+  <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="fw-bolder display-2">Mate Restaurant</h1>
+          <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+            Modern Restaurant service on Django!
+          </h2>
+          {% if request.user.is_authenticated%}
+            <h2 class="lead fw-normal text-muted mb-4 px-lg-10">You are in!</h2>
+          {% else %}
+            <div class="d-flex justify-content-center align-items-center mb-5">
+              <a href="{% url 'register' %}" class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2"><span
+                  class="fas fa-id-card me-2"></span> <span class="d-none d-md-inline">Create account</span></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
     </div>
-  </div>
-{% endblock %}
+    <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="fill-white"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+        <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+      </svg></figure>
+  </section>
+  <section class="section section-lg">
+    <div class="container">
+      <div class="row justify-content-center mb-5 mb-lg-6">
+        <div class="col-6 col-md-3 text-center mb-4">
+          <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+            <span class="fas fa-user-check text-tertiary"></span>
+          </div>
+          <h3 class="fw-bolder">{{ num_cooks }}</h3>
+          <p class="text-gray">Cooks in restaurant</p>
+        </div>
+        <div class="col-6 col-md-3 text-center mb-4">
+          <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+            <span class="fas fa-drumstick-bite text-tertiary"></span>
+          </div>
+          <h3 class="fw-bolder">{{ num_dish_types }}</h3>
+          <p class="text-gray">Dish types</p>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+          <div class="icon icon-shape icon-lg bg-white shadow-lg border-light rounded-circle mb-4">
+            <span class="fas fa-utensils text-tertiary"></span>
+          </div>
+          <h3 class="fw-bolder">{{ num_dishes }}</h3>
+          <p class="text-gray">Dishes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

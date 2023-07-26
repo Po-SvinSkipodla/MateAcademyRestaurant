@@ -5,24 +5,30 @@
   <link rel="stylesheet" href="{% static "css/page-list.css" %}">
 {% endblock %}
 {% block content %}
-  <div class="heading">
-    <h1>
-      Dish type list
-    </h1>
-    <h1>
-      <a href="{% url 'dish-type-create' %}" class="btn btn-primary link-to-page">
+  <section class="section-header overflow-hidden py-7 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="fw-bolder display-2">Dish type list</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+    <div class="text-center d-flex align-items-center justify-content-center">
+      <a href="{% url 'dish-create' %}" class="btn btn-primary link-to-page btn-lg my-3 mx-3">
         Create
       </a>
-    </h1>
-  </div>
-  <div class="table-container">
+      <form action="" method="get" class="form-inline">
+        {{ search_form }}
+        <input type="submit" value="Search" class="btn btn-primary mx-2 btn-lg ">
+      </form>
+    </div>
+  <div style="width: fit-content; margin: auto">
     {% if dish_types_list %}
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-hover">
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Update</th>
-          <th>Delete</th>
         </tr>
 
         {% for dish_type in dish_types_list %}
@@ -31,17 +37,17 @@
                 {{ dish_type.id }}
             </td>
             <td>
-              <p>{{ dish_type.name }}</p>
-            </td>
-            <td>
-              <a href="{% url 'dish-type-update' pk=dish_type.id %}">
-                Update
-              </a>
-            </td>
-            <td>
-              <a href="{% url 'dish-type-delete' pk=dish_type.id %}">
-                Delete
-              </a>
+              <div class="d-flex justify-content-between">
+                <p style="margin-right: 1.5rem">{{ dish_type.name }}</p>
+                <div>
+                  <a href="{% url 'dish-type-update' pk=dish_type.id %}">
+                    <i class="fas fa-edit mr-3" data-toggle="tooltip" data-placement="top" title="Edit item"></i>
+                  </a>
+                  <a href="{% url 'dish-type-delete' pk=dish_type.id %}">
+                    <i class="fas fa-trash text-danger mr-2" data-toggle="tooltip" data-placement="top" title="Delete item"></i>
+                  </a>
+                </div>
+              </div>
             </td>
           </tr>
         {% endfor %}

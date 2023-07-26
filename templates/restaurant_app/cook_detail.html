@@ -1,12 +1,7 @@
 {% extends "base.html" %}
 
-{% block styles%}
-  {% load static %}
-  <link rel="stylesheet" href="{% static "css/page-detail.css" %}">
-{% endblock %}
-
 {% block content %}
-  <div class="detail-container">
+  <div class="pt-8 mx-auto" style="width: fit-content">
     <h1>
       Username: {{ cook.username }}
       <a href="{% url 'cook-delete' pk=cook.id %}" class="btn btn-danger link-to-page">
@@ -23,12 +18,10 @@
         Years of experience:
       </strong>
       {{ cook.years_of_experience }}
-      <br>
-      <a href="{% url 'cook-update' pk=cook.id %}" class="btn btn-secondary link-to-page">
-        Update years of experience
+      <a href="{% url 'cook-update' pk=cook.id %}">
+        <i class="fas fa-edit mr-3" data-toggle="tooltip" data-placement="top" title="Edit item"></i>
       </a>
     </p>
-    <p><strong>Is staff:</strong> {{ cook.is_staff }}</p>
   </div>
 
 {% endblock %}

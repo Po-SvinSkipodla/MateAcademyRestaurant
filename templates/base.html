@@ -1,19 +1,68 @@
+<!--
+
+=========================================================
+* Pixel Free Bootstrap 5 UI Kit
+=========================================================
+
+* Product Page: https://themesberg.com/product/ui-kit/pixel-free-bootstrap-5-ui-kit
+* Copyright 2021 Themesberg (https://www.themesberg.com)
+
+* Coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Contact us if you want to remove it.
+
+-->
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
-    {% block styles %}
-    {% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Primary Meta Tags -->
+    <title>Mate Restaurant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Pixel - Free Bootstrap 5 UI Kit">
+    <meta name="author" content="Themesberg">
+    <meta name="description" content="Open source and free Bootstrap 5 UI Kit featuring 80 UI components, 5 example pages, and a Gulp and Sass workflow.">
+    <link rel="canonical" href="https://themesberg.com/product/ui-kit/pixel-free-bootstrap-5-ui-kit">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demo.themesberg.com/pixel-bootstrap-5-ui-kit">
+    <meta property="og:title" content="Pixel - Free Bootstrap 5 UI Kit">
+    <meta property="og:description" content="Open source and free Bootstrap 5 UI Kit featuring 80 UI components, 5 example pages, and a Gulp and Sass workflow.">
+    <meta property="og:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/pixel-lite/pixel-lite-preview.jpg">
+
+      <!-- Fontawesome -->
+      <link type="text/css" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    
+      <!-- Pixel CSS -->
+      <link type="text/css" href="{% static 'css/pixel.css' %}" rel="stylesheet">
+    
 </head>
+
 <body>
-  {% include "includes/navbar.html" %}
-  {% block content %}
-  {% endblock %}
+  <div class="min-vh-100 position-relative">
+    {% block header %}
+      {% include 'includes/navigation.html' %}
+    {% endblock header %}
+    <div class="pb-2">
+      {% block content %}{% endblock content %}
+        {% block pagination %}
+      {% include "includes/pagination.html" %}
+    {% endblock %}
+    </div>
+    {% block footer %}
+      {% include 'includes/footer.html' %}
+    {% endblock footer %}
+    {% include 'includes/scripts.html' %}
+    {% block javascripts %}{% endblock javascripts %}
+  </div>
+
+
 </body>
+
 </html>
