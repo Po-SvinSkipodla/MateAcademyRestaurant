@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,13 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--ko9-_)s$vh3&3@-79@g$o)pdg99%7+zbw&_7h34hb27nzq@1j"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure--ko9-_)s$vh3&3@-79@g$o)pdg99%7+zbw&_7h34hb27nzq@1j")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 # Application definition
 
@@ -37,7 +36,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'debug_toolbar',
     "restaurant_app",
     "bootstrap5",
     "crispy_forms",
@@ -110,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "restaurant_app.Cook"
+
+LOGIN_REDIRECT_URL = "/"
 
 
 # Internationalization

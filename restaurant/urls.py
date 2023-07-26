@@ -21,5 +21,4 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("restaurant_app.urls"), name="restaurant-app"),
     path("accounts/", include("django.contrib.auth.urls")),
-    # path("__debug__/", include("debug_toolbar.urls")),
 ]
