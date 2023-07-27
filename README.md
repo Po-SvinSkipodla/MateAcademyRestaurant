@@ -6,6 +6,13 @@ This is a platform for a Restaurant where users are cooks. They can assign each 
 
 [My project on Render]()
 
+
+## Test user
+
+login: admin
+
+password: testmyproject
+
 ## Features
 
 - Search for dishes and cooks
