@@ -14,6 +14,7 @@ class DishType(models.Model):
 
 class Cook(AbstractUser):
     years_of_experience = models.IntegerField(null=True)
+    email = models.EmailField("email address", blank=True, unique=True)
 
     class Meta:
         verbose_name_plural = "cooks"
