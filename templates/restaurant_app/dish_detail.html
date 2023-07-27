@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="pt-8 mx-auto" style="width: fit-content">
+    <div>
+      <h1>
+        Name: {{ dish.name }}
+        <a href="{% url 'dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
+          Delete
+        </a>
+
+        <a href="{% url 'dish-update' pk=dish.id %}" class="btn btn-secondary link-to-page">
+          Update
+        </a>
+      </h1>
+
+      <p><strong>Price</strong> {{ dish.price }}</p>
+      <p><strong>Description</strong> {{ dish.description}}</p>
+      <p><strong>Cooks</strong></p>
+      {% if dish.cooks.all %}
+        <ul>
+        {% for cook in dish.cooks.all %}
+          <li><a href="{% url 'cook-detail' pk=cook.id %}">{{ cook.username }}</a></li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <h4>There are no cooks for this dish. Click update to assign them</h4>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

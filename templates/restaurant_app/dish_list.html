@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static "css/page-list.css" %}">
+{% endblock %}
+{% block content %}
+  <section class="section-header overflow-hidden py-7 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="fw-bolder display-2">Dish list</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="text-center d-flex align-items-center justify-content-center">
+    <a href="{% url 'dish-create' %}" class="btn btn-primary link-to-page btn-lg my-3 mx-3">
+      Create
+    </a>
+    <form action="" method="get" class="form-inline">
+      {{ search_form }}
+      <input type="submit" value="Search" class="btn btn-primary btn-lg mx-2">
+    </form>
+  </div>
+  <div style="width: fit-content; margin: auto">
+    {% if dish_list %}
+      <table class="table table-bordered table-condensed">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Dish type</th>
+          <th>Description</th>
+        </tr>
+
+        {% for dish in dish_list %}
+          <tr>
+            <td>
+                {{ dish.id }}
+            </td>
+            <td>
+              <a href="{% url 'dish-detail' pk=dish.id %}" class="link-info">{{ dish.name }}</a>
+            </td>
+            <td>
+                {{ dish.price }}
+            </td>
+            <td>
+                {{ dish.dish_type }}
+            </td>
+            <td>
+                {{ dish.description }}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+
+    {% else %}
+        <p>There are no dishes in the service.</p>
+    {% endif %}
+  </div>
+{% endblock %}
